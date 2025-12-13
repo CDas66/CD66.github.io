@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlock Our Story 🔐</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .container {
+            width: 100%;
+            max-width: 700px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .screen {
+            display: none;
+            padding: 20px;
+        }
+        .screen.active {
+            display: block;
+            animation: fadeIn 0.8s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            font-family: 'Caveat', cursive;
+            color: #e73c7e;
+            font-size: 3.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+        }
+        h2 {
+            color: #23a6d5;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        .question {
+            font-size: 1.4rem;
+            margin: 30px 0;
+            color: #444;
+            min-height: 80px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin: 40px 0;
+        }
+        .option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 16px;
+            padding: 18px 25px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .option:hover {
+            background: #e3f2fd;
+            border-color: #23a6d5;
+            transform: translateX(10px);
+        }
+        .option i {
+            color: #e73c7e;
+            font-size: 1.5rem;
+        }
+        .next-btn {
+            background: linear-gradient(to right, #e73c7e, #ee7752);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 8px 20px rgba(231, 60, 126, 0.4);
+        }
+        .next-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(231, 60, 126, 0.6);
+        }
+        .heart-beat {
+            font-size: 4rem;
+            color: #e73c7e;
+            margin: 30px 0;
+            animation: heartbeat 1.2s infinite;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        .final-message {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 35px;
+            margin: 30px 0;
+            text-align: left;
+            border-left: 6px solid #23d5ab;
+            white-space: pre-line;
+            line-height: 1.8;
+            font-size: 1.2rem;
+            color: #444;
+        }
+        .signature {
+            font-family: 'Caveat', cursive;
+            font-size: 2.5rem;
+            color: #e73c7e;
+            margin-top: 40px;
+            text-align: right;
+        }
+        .progress-bar {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin: 30px 0;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #23a6d5, #23d5ab);
+            width: 20%;
+            border-radius: 4px;
+            transition: width 0.5s;
+        }
+        .emoji {
+            font-size: 2.5rem;
+            margin: 20px 0;
+        }
+        .secret-code {
+            font-family: monospace;
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 25px 0;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- SCREEN 1: WELCOME -->
+        <div class="screen active" id="screen1">
+            <div class="heart-beat">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h1>Hello, <span style="color:#23a6d5;">✏️Misha(My Love)</span>!</h1>
+            <h2>You've discovered a secret message.</h2>
+            <p style="font-size:1.2rem; margin:25px 0; color:#666;">
+                To unlock it, answer these 5 questions about us.<br>
+                <em>(Don't worry, there are no wrong answers. Only cute ones.)</em>
+            </p>
+            <div class="secret-code">
+                <i class="fas fa-lock"></i> LOVE_VAULT.EXE INITIALIZED
+            </div>
+            <button class="next-btn" onclick="nextScreen(2)">Begin Our Adventure <i class="fas fa-key"></i></button>
+        </div>
+
+        <!-- SCREEN 2-6: QUESTIONS -->
+        <div class="screen" id="screen2">
+            <div class="progress-bar">
+                <div class="progress" id="progress" style="width:20%"></div>
+            </div>
+            <h2>Question 1 of 5</h2>
+            <div class="question" id="question-text">
+                Our first date felt like...
+            </div>
+            <div class="options">
+                <div class="option" onclick="selectOption(1, this)">
+                    <i class="fas fa-star"></i>
+                    <span>✏️ A perfect scene from a movie</span>
+                </div>
+                <div class="option" onclick="selectOption(2, this)">
+                    <i class="fas fa-laugh-beam"></i>
+                    <span>✏️ A hilarious comedy where we couldn't stop laughing</span>
+                </div>
+                <div class="option" onclick="selectOption(3, this)">
+                    <i class="fas fa-magic"></i>
+                    <span>✏️ Magic — I knew something special had begun</span>
+                </div>
+                <div class="option" onclick="selectOption(4, this)">
+                    <i class="fas fa-utensils"></i>
+                    <span>✏️ The best meal/conversation of my life</span>
+                </div>
+            </div>
+            <button class="next-btn" onclick="nextScreen(3)" id="btn2" disabled>Next <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div class="screen" id="screen3">
+            <div class="progress-bar">
+                <div class="progress" id="progress" style="width:40%"></div>
+            </div>
+            <h2>Question 2 of 5</h2>
+            <div class="question">
+                My favorite little thing you do is...
+            </div>
+            <div class="options">
+                <div class="option" onclick="selectOption(1, this)">
+                    <i class="fas fa-smile"></i>
+                    <span>✏️ The way your nose scrunches when you laugh</span>
+                </div>
+                <div class="option" onclick="selectOption(2, this)">
+                    <i class="fas fa-music"></i>
+                    <span>✏️ How you hum songs when you're focused</span>
+                </div>
+                <div class="option" onclick="selectOption(3, this)">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <span>✏️ That specific look you give me that says "I love you"</span>
+                </div>
+                <div class="option" onclick="selectOption(4, this)">
+                    <i class="fas fa-couch"></i>
+                    <span>✏️ How you curl up next to me when we watch movies</span>
+                </div>
+            </div>
+            <button class="next-btn" onclick="nextScreen(4)" id="btn3" disabled>Next <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div class="screen" id="screen4">
+            <div class="progress-bar">
+                <div class="progress" id="progress" style="width:60%"></div>
+            </div>
+            <h2>Question 3 of 5</h2>
+            <div class="question">
+                Our best adventure so far was...
+            </div>
+            <div class="options">
+                <div class="option" onclick="selectOption(1, this)">
+                    <i class="fas fa-car"></i>
+                    <span>✏️ That spontaneous road trip to ✏️[PLACE]</span>
+                </div>
+                <div class="option" onclick="selectOption(2, this)">
+                    <i class="fas fa-umbrella-beach"></i>
+                    <span>✏️ The beach day when ✏️[SOMETHING FUNNY HAPPENED]</span>
+                </div>
+                <div class="option" onclick="selectOption(3, this)">
+                    <i class="fas fa-home"></i>
+                    <span>✏️ Honestly, any lazy Sunday at home with you</span>
+                </div>
+                <div class="option" onclick="selectOption(4, this)">
+                    <i class="fas fa-hiking"></i>
+                    <span>✏️ That hike where we got lost but found an amazing view</span>
+                </div>
+            </div>
+            <button class="next-btn" onclick="nextScreen(5)" id="btn4" disabled>Next <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div class="screen" id="screen5">
+            <div class="progress-bar">
+                <div class="progress" id="progress" style="width:80%"></div>
+            </div>
+            <h2>Question 4 of 5</h2>
+            <div class="question">
+                What I look forward to most with you is...
+            </div>
+            <div class="options">
+                <div class="option" onclick="selectOption(1, this)">
+                    <i class="fas fa-plane"></i>
+                    <span>✏️ Traveling the world together</span>
+                </div>
+                <div class="option" onclick="selectOption(2, this)">
+                    <i class="fas fa-dog"></i>
+                    <span>✏️ Adopting a pet and building a cozy home</span>
+                </div>
+                <div class="option" onclick="selectOption(3, this)">
+                    <i class="fas fa-grin-tongue-wink"></i>
+                    <span>✏️ All the inside jokes we haven't even created yet</span>
+                </div>
+                <div class="option" onclick="selectOption(4, this)">
+                    <i class="fas fa-heartbeat"></i>
+                    <span>✏️ Growing old together and still acting silly</span>
+                </div>
+            </div>
+            <button class="next-btn" onclick="nextScreen(6)" id="btn5" disabled>Next <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <!-- SCREEN 6: FINAL REVEAL -->
+        <div class="screen" id="screen6">
+            <div class="progress-bar">
+                <div class="progress" style="width:100%"></div>
+            </div>
+            <div class="emoji">🎉✨💖</div>
+            <h1>Message Unlocked!</h1>
+            <p style="font-size:1.3rem; margin:20px 0; color:#23a6d5;">
+                Your personalized love note is ready...
+            </p>
+            
+            <div class="final-message" id="finalMessage">
+                <!-- This will be filled by JavaScript -->
+            </div>
+            
+            <div class="signature" id="signature">
+                <!-- This will be filled by JavaScript -->
+            </div>
+            
+            <button class="next-btn" onclick="location.reload()" style="margin-top:40px;">
+                <i class="fas fa-redo"></i> Play Again?
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ✏️ PERSONALIZE THESE ARRAYS!
+        const questionAnswers = [
+            "Your answer just reminded me how perfectly we clicked from day one.",
+            "Seeing you do that makes my heart do a little happy dance every single time.",
+            "That memory is my favorite story to tell. I love adventuring with you.",
+            "Thinking about our future together is my favorite daydream.",
+            "Every moment with you feels like collecting treasures for a lifetime."
+        ];
+        
+        // ✏️ PERSONALIZE THIS FINAL MESSAGE!
+        const finalLoveLetter = `My dearest ✏️Misha,
+
+You just took a little journey through "us," and every answer you chose reminded me of why I'm the luckiest person alive.
+
+From our very first date to the silly little moments we share, my life has become brighter and more beautiful since you entered it. I cherish how we can be perfectly comfortable in silence or laughing until we cry.
+
+You are my favorite hello and my hardest goodbye. Thank you for being exactly who you are.
+
+I can't wait for all our tomorrows.
+
+With all my love,`;
+
+        // Quiz logic
+        let selectedOptions = [];
+        
+        function selectOption(qIndex, element) {
+            // Remove selection from other options in this question
+            const parent = element.parentElement;
+            const siblings = parent.querySelectorAll('.option');
+            siblings.forEach(sib => {
+                sib.style.background = '#f8f9fa';
+                sib.style.borderColor = '#e9ecef';
+            });
+            
+            // Highlight selected
+            element.style.background = '#e3f2fd';
+            element.style.borderColor = '#23a6d5';
+            
+            // Store answer
+            selectedOptions[qIndex] = questionAnswers[qIndex];
+            
+            // Enable next button
+            const currentScreen = element.closest('.screen').id;
+            const btnId = 'btn' + currentScreen.slice(-1);
+            document.getElementById(btnId).disabled = false;
+        }
+        
+        function nextScreen(screenNum) {
+            // Hide all screens
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            
+            // Show target screen
+            document.getElementById('screen' + screenNum).classList.add('active');
+            
+            // If it's the final screen, generate the letter
+            if (screenNum === 6) {
+                generateFinalLetter();
+            }
+        }
+        
+        function generateFinalLetter() {
+            let letter = finalLoveLetter + "\n\n";
+            
+            // Add selected answers as personalized paragraphs
+            selectedOptions.forEach((answer, index) => {
+                if (answer) {
+                    letter += "• " + answer + "\n\n";
+                }
+            });
+            
+            // Add a closing line
+            letter += "Forever yours,\n";
+            
+            // Display
+            document.getElementById('finalMessage').textContent = letter;
+            document.getElementById('signature').innerHTML = "✏️Chirayush <i class='fas fa-heart' style='color:#e73c7e; margin-left:10px;'></i>";
+            
+            // Add confetti effect
+            for(let i=0; i<50; i++) {
+                setTimeout(() => {
+                    const emoji = document.createElement('div');
+                    emoji.innerHTML = '💖';
+                    emoji.style.position = 'fixed';
+                    emoji.style.fontSize = '20px';
+                    emoji.style.left = Math.random() * 100 + 'vw';
+                    emoji.style.top = '-30px';
+                    emoji.style.zIndex = '9999';
+                    emoji.style.animation = `fall ${Math.random()*2+2}s linear forwards`;
+                    document.body.appendChild(emoji);
+                    
+                    // Add falling animation
+                    const style = document.createElement('style');
+                    style.innerHTML = `@keyframes fall { to { transform: translateY(100vh) rotate(${Math.random()*360}deg); } }`;
+                    document.head.appendChild(style);
+                    
+                    // Remove after animation
+                    setTimeout(() => emoji.remove(), 3000);
+                }, i * 100);
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Pre-populate signature
+            document.getElementById('signature').innerHTML = "✏️Chirayush";
+        });
+    </script>
+</body>
+</html>
